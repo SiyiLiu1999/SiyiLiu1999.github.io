@@ -63,35 +63,68 @@ img { display:block; max-width:100%; }
 .button.secondary { background: var(--blue-soft); color: var(--ink); border: 1px solid var(--line); }
 .mini-links { margin-top: 28px; display:flex; gap:10px; color: #70869b; font-size: 13px; }
 
+
 .hero-gallery {
   display:grid;
-  grid-template-columns:.9fr 1.1fr;
+  grid-template-columns:minmax(0, .43fr) minmax(0, .57fr);
   gap:14px;
-  height:560px;
   align-items:stretch;
 }
+
+/* The left column sets the total collage height. */
 .hero-gallery-left {
-  display:grid;
-  grid-template-rows:.8fr 1.2fr;
+  display:flex;
+  flex-direction:column;
   gap:14px;
   min-width:0;
-  min-height:0;
 }
+
 .hero-image {
   margin:0;
   min-width:0;
-  min-height:0;
   overflow:hidden;
   border-radius:24px;
   background:#edf5f9;
   box-shadow:0 20px 52px rgba(34,76,105,.10);
 }
-.hero-image img { display:block; width:100%; height:100%; }
-.hero-image-lifestyle img { object-fit:cover; object-position:62% center; }
-.hero-image-headshot { width:100%; height:auto; }
-.hero-image-headshot img { object-fit:cover; object-position:center 30%; }
-.hero-image-nature { width:100%; height:100%; }
-.hero-image-nature img { object-fit:cover; object-position:center center; }
+
+/* Top-left: intentionally tighter crop so the face is the focal point. */
+.hero-image-lifestyle {
+  aspect-ratio:1.28 / 1;
+}
+.hero-image-lifestyle img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:72% 46%;
+}
+
+/* Bottom-left: preserve the headshot's original proportions instead of
+   forcing it into a tall box. */
+.hero-image-headshot {
+  width:100%;
+}
+.hero-image-headshot img {
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* Right: automatically stretches to exactly the total height of the two
+   left photos plus the gap between them. */
+.hero-image-nature {
+  width:100%;
+  height:100%;
+  align-self:stretch;
+}
+.hero-image-nature img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+}
 
 .section { padding: 110px 0; border-top: 1px solid var(--line); }
 .two-col { display:grid; grid-template-columns: .95fr 1.05fr; gap:90px; margin-top: 26px; }
@@ -191,7 +224,6 @@ footer { width:min(1120px,calc(100% - 48px)); margin:0 auto; padding:28px 0 42px
 @media (max-width: 1050px) and (min-width: 851px) {
   .hero { grid-template-columns:1fr 440px; gap:38px; }
   .hero h1 { font-size:clamp(54px,6vw,76px); }
-  .hero-gallery { height:520px; }
 }
 @media (max-width: 850px) {
   .site-header { height:68px; }
@@ -203,8 +235,7 @@ footer { width:min(1120px,calc(100% - 48px)); margin:0 auto; padding:28px 0 42px
   .hero-gallery {
     max-width:720px;
     width:100%;
-    height:520px;
-    grid-template-columns:.9fr 1.1fr;
+    grid-template-columns:minmax(0, .43fr) minmax(0, .57fr);
   }
   .about-playful-head, .two-col { grid-template-columns:1fr; gap:34px; }
   .stat-grid { grid-template-columns:repeat(2,1fr); }
@@ -220,36 +251,17 @@ footer { width:min(1120px,calc(100% - 48px)); margin:0 auto; padding:28px 0 42px
   .hero { min-height:auto; }
   .hero h1 { font-size:54px; }
 
-  /* Keep the photo collage as two columns on phones too.
-     The right portrait is exactly the same total height as the two left photos + gap. */
+  /* Keep the collage in two columns, while preserving the headshot ratio. */
   .hero-gallery {
     width:100%;
     max-width:none;
-    height:460px;
-    grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
-    gap:10px;
-    align-items:stretch;
-  }
-  .hero-gallery-left {
-    height:100%;
-    grid-template-rows:minmax(0,.82fr) minmax(0,1.18fr);
+    grid-template-columns:minmax(0, .43fr) minmax(0, .57fr);
     gap:10px;
   }
-  .hero-image-lifestyle,
-  .hero-image-headshot,
-  .hero-image-nature {
-    width:100%;
-    height:100%;
-  }
-  .hero-image img {
-    width:100%;
-    max-width:none;
-    height:100%;
-    object-fit:cover;
-  }
-  .hero-image-lifestyle img { object-position:64% center; }
-  .hero-image-headshot img { object-position:center 28%; }
-  .hero-image-nature img { object-position:center center; }
+  .hero-gallery-left { gap:10px; }
+  .hero-image { border-radius:18px; }
+  .hero-image-lifestyle { aspect-ratio:1.22 / 1; }
+  .hero-image-lifestyle img { object-position:73% 46%; }
 
   .section { padding:78px 0; }
   .about-playful-head h2 { font-size:48px; }
