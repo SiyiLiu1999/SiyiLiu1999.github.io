@@ -12,3 +12,24 @@ body {
   background-attachment: fixed;
 }
 ::selection { background: #c7ebff; }
+
+/* Navigation: section titles only, without a left-side name. */
+.header{justify-content:center;}
+.header nav{justify-content:center;gap:clamp(10px,1.6vw,24px);}
+.header nav a{font-size:clamp(11px,1vw,13px);}
+.intro h1{font-size:clamp(46px,6.5vw,69px);line-height:1.12;}
+.section p{line-height:1.85;}
+@media(max-width:650px){.header{align-items:center;}.header nav{justify-content:center;}.intro h1{font-size:clamp(43px,10vw,58px);}}
+
+/* Restore the original prominent name and affiliation in the hero. */
+.intro h1{font-size:clamp(76px,10vw,150px);line-height:.95;letter-spacing:-.045em;margin:18px 0 28px;}
+.intro .eyebrow{font-size:clamp(15px,1.6vw,22px);letter-spacing:.035em;}
+@media(max-width:650px){.intro h1{font-size:clamp(68px,14vw,100px);}}
+
+/* Restore original website name sizing (original: clamp(58px, 7vw, 90px)). */
+.intro h1{font-size:clamp(58px,7vw,90px);line-height:.95;}
+@media(max-width:650px){.intro h1{font-size:54px;}}
+
+/* Smaller hero name: overrides earlier oversized declarations. */
+.intro h1 { font-size: clamp(44px, 5vw, 64px); line-height: 1.08; }
+@media (max-width: 650px) { .intro h1 { font-size: clamp(42px, 10vw, 54px); } }
